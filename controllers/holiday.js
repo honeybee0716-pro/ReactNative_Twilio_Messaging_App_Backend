@@ -42,6 +42,7 @@ const getById = async (req, res) => {
 const create = async (req, res) => {
   const { currentUser } = req;
   const holiday = new Holiday({
+    client_id : currentUser.id,
     ...req.body,
   });
   holiday.save().catch((err) => {

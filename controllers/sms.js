@@ -20,7 +20,7 @@ const sendMessage = async (currentUser, customer, holiday) => {
   // console.log(currentUser.id, currentUser.firstName , currentUser.lastName , currentUser.email);
   // console.log(customer.id, customer.firstName, customer.lastName, customer.phone);
   // console.log(holiday.title, holiday.description);
-  const message_string=`Hi ${customer.firstName +' '+ customer.lastName}, \n${holiday.description} \nFrom ${currentUser.firstName +' '+ currentUser.lastName}`
+  const message_string=`Hi ${customer.firstName +' '+ customer.lastName},\n${holiday.description}\nFrom ${currentUser.firstName +' '+ currentUser.lastName}`
 
   console.log("===MSG===>",message_string , new Date());
 
@@ -36,6 +36,7 @@ const sendMessage = async (currentUser, customer, holiday) => {
     const sms = new SMS({
       client_id: currentUser.id,
       customer_id: customer.id,
+      title : holiday.title,
       message: message_string,
       send_time: new Date().toISOString(),
       status: false
@@ -122,9 +123,9 @@ const get = async (req, res) => {
 // Retrieves a specific chat history record by its ID for the current user
 const getById = async (req, res) => {
   const { currentUser } = req;
-  const sms = await SMS.findOne({
+  const sms = await SMS.find({
     client_id: currentUser.id,
-    _id: req.params.id,
+    customer_id: req.params.id,
   });
 
   if (!sms) {

@@ -9,6 +9,7 @@ const SMSSchema = new Schema(
       ref: 'client',
     },
     customer_id: String,
+    title: String,
     message: String,
     send_time: String,
     receive_time: String,

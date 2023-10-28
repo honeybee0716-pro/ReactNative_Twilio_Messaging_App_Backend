@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 const HolidaySchema = new Schema(
   {
+    client_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'client',
+    },
     location_id: String,
     title: String,
     description: String,
